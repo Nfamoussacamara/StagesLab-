@@ -1,0 +1,24 @@
+/* ============================
+   LabéStages — Styles globaux
+   ============================ */
+
+/* Bootstrap */
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+/* ngx-toastr */
+@import "ngx-toastr/toastr";
+
+/* Variables globales */
+:root {
+  --primary: #1a56db;
+  --secondary: #6c757d;
+  --success: #0f9d58;
+  --danger: #d93025;
+  --bg-light: #f8f9fa;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-light);
+  color: #333;
+}

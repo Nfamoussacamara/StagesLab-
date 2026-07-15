@@ -1,0 +1,31 @@
+# ============================
+# Java / Spring Boot
+# ============================
+backend/target/
+backend/*.class
+backend/*.jar
+backend/*.war
+backend/.classpath
+backend/.project
+backend/.settings/
+backend/.idea/
+backend/*.iml
+backend/HELP.md
+
+# ============================
+# Angular / Node
+# ============================
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.env
+
+# ============================
+# OS / Éditeurs
+# ============================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+*.log
