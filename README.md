@@ -8,7 +8,7 @@
 
 ### Backend (API REST)
 * **Framework :** Spring Boot 3.2.5 (Java 19)
-* **Persistance :** Spring Data JPA / Base de données en mémoire **H2**
+* **Persistance :** Spring Data JPA / Base de données fichier **H2**
 * **Validation :** Jakarta Bean Validation (`@NotBlank`, `@Email`, `@Min`, etc.)
 * **Gestion d'erreurs :** RestControllerAdvice global avec retours JSON standardisés
 * **Documentation :** Swagger UI / OpenAPI 3
