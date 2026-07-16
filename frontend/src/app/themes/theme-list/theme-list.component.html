@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="h3 mb-1 text-dark fw-bold">Gestion des Thèmes & Projets</h1>
+    <p class="text-muted mb-0">Suivez les thèmes de projets, leurs attributions aux étudiants et leurs encadreurs.</p>
+  </div>
+  <a routerLink="/themes/nouveau" class="btn btn-primary">
+    <i class="bi bi-plus-lg me-1"></i> Soumettre un Thème
+  </a>
+</div>
+
+<div class="card border-0 shadow-sm">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-dark">
+          <tr>
+            <th class="ps-4">Sujet / Titre</th>
+            <th>Domaine</th>
+            <th>Étudiant affecté</th>
+            <th>Encadreur</th>
+            <th class="text-center">Statut</th>
+            <th class="text-center pe-4" style="width: 140px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="loading && themes.length === 0">
+            <td colspan="6" class="text-center py-5">
+              <div class="spinner-border text-primary" role="status"></div>
+              <p class="mt-2 text-muted mb-0">Chargement des thèmes...</p>
+            </td>
+          </tr>
+          <tr *ngIf="!loading && themes.length === 0">
+            <td colspan="6" class="text-center py-5 text-muted">
+              <i class="bi bi-journal-x display-4 d-block mb-2"></i>
+              Aucun thème soumis.
+            </td>
+          </tr>
+          <tr *ngFor="let theme of themes">
+            <td class="ps-4">
+              <div class="fw-semibold text-dark">{{ theme.titre }}</div>
+              <small class="text-muted d-block text-truncate" style="max-width: 300px;" [title]="theme.description">{{ theme.description }}</small>
+            </td>
+            <td><span class="badge bg-light text-dark border">{{ theme.domaine }}</span></td>
+            <td>
+              <div class="fw-semibold">{{ theme.etudiantPrenom }} {{ theme.etudiantNom | uppercase }}</div>
+              <small class="text-primary font-monospace">{{ theme.etudiantMatricule }}</small>
+            </td>
+            <td>
+              <div class="text-secondary fw-semibold">{{ theme.encadreurNom }}</div>
+              <small class="text-muted">{{ theme.encadreurSpecialite }}</small>
+            </td>
+            <td class="text-center">
+              <span class="badge" [ngClass]="getStatusBadgeClass(theme.statut)">
+                {{ getStatusLabel(theme.statut) }}
+              </span>
+            </td>
+            <td class="text-center pe-4">
+              <div class="btn-group btn-group-sm" role="group">
+                <a [routerLink]="['/themes/modifier', theme.id]" class="btn btn-outline-warning" title="Modifier/Valider">
+                  <i class="bi bi-pencil"></i>
+                </a>
+                <button type="button" class="btn btn-outline-danger" (click)="triggerDelete(theme)" title="Supprimer">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<app-confirm-delete
+  *ngIf="showDeleteModal"
+  [title]="'Supprimer le thème'"
+  [message]="'Voulez-vous vraiment supprimer le thème : \\'' + themeToDelete?.titre + '\\' ? Cette opération est irréversible.'"
+  (confirmed)="confirmDelete()"
+  (cancelled)="cancelDelete()"
+></app-confirm-delete>

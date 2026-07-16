@@ -1,0 +1,54 @@
+.bg-gradient-blue {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+}
+
+.bg-gradient-teal {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.bg-gradient-purple {
+  background: linear-gradient(135deg, #6441a5 0%, #2a0845 100%);
+}
+
+.bg-gradient-dark {
+  background: linear-gradient(135deg, #141e30 0%, #243b55 100%);
+}
+
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.hover-white:hover {
+  color: #fff !important;
+}
+
+/* Subtitles support */
+.bg-warning-subtle {
+  background-color: #fff3cd !important;
+}
+.text-warning-emphasis {
+  color: #664d03 !important;
+}
+.bg-success-subtle {
+  background-color: #d1e7dd !important;
+}
+.text-success-emphasis {
+  color: #0f5132 !important;
+}
+.bg-primary-subtle {
+  background-color: #cfe2ff !important;
+}
+.text-primary-emphasis {
+  color: #084298 !important;
+}
+.bg-danger-subtle {
+  background-color: #f8d7da !important;
+}
+.text-danger-emphasis {
+  color: #842029 !important;
+}

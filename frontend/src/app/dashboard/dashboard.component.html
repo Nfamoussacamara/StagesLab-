@@ -1,0 +1,157 @@
+<div class="row mb-4">
+  <div class="col font-title">
+    <h1 class="h2 text-dark font-weight-bold">Tableau de bord</h1>
+    <p class="text-muted">Vue d'ensemble de l'activité des mémoires, stages et encadrements.</p>
+  </div>
+  <div class="col-auto d-flex align-items-center">
+    <button class="btn btn-outline-primary" (click)="loadStats()">
+      <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" *ngIf="loading"></span>
+      Actualiser
+    </button>
+  </div>
+</div>
+
+<div *ngIf="loading && !stats" class="text-center py-5">
+  <div class="spinner-border text-primary" role="status"></div>
+  <p class="mt-2 text-muted">Chargement des données...</p>
+</div>
+
+<div *ngIf="stats" class="row">
+  <!-- Card Étudiants -->
+  <div class="col-12 col-md-4 mb-4">
+    <div class="card border-0 shadow-sm text-white overflow-hidden bg-gradient-blue">
+      <div class="card-body p-4 position-relative z-index-2">
+        <h6 class="text-uppercase text-white-50 font-weight-bold small mb-2">Étudiants de Licence 3</h6>
+        <div class="d-flex align-items-center justify-content-between">
+          <span class="display-5 font-weight-bold">{{ stats.totalEtudiants }}</span>
+          <span class="fs-1"><i class="bi bi-people"></i></span>
+        </div>
+        <div class="mt-3">
+          <a routerLink="/etudiants" class="text-white-50 text-decoration-none hover-white small">
+            Gérer les étudiants <i class="bi bi-arrow-right-short ms-1"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card Encadreurs -->
+  <div class="col-12 col-md-4 mb-4">
+    <div class="card border-0 shadow-sm text-white overflow-hidden bg-gradient-teal">
+      <div class="card-body p-4 position-relative z-index-2">
+        <h6 class="text-uppercase text-white-50 font-weight-bold small mb-2">Encadreurs disponibles</h6>
+        <div class="d-flex align-items-center justify-content-between">
+          <span class="display-5 font-weight-bold">{{ stats.totalEncadreurs }}</span>
+          <span class="fs-1"><i class="bi bi-person-badge"></i></span>
+        </div>
+        <div class="mt-3">
+          <a routerLink="/encadreurs" class="text-white-50 text-decoration-none hover-white small">
+            Gérer les encadreurs <i class="bi bi-arrow-right-short ms-1"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card Thèmes -->
+  <div class="col-12 col-md-4 mb-4">
+    <div class="card border-0 shadow-sm text-white overflow-hidden bg-gradient-purple">
+      <div class="card-body p-4 position-relative z-index-2">
+        <h6 class="text-uppercase text-white-50 font-weight-bold small mb-2">Thèmes de Recherches</h6>
+        <div class="d-flex align-items-center justify-content-between">
+          <span class="display-5 font-weight-bold">{{ stats.totalThemes }}</span>
+          <span class="fs-1"><i class="bi bi-journal-text"></i></span>
+        </div>
+        <div class="mt-3">
+          <a routerLink="/themes" class="text-white-50 text-decoration-none hover-white small">
+            Gérer les projets <i class="bi bi-arrow-right-short ms-1"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Répartition par statut -->
+<div *ngIf="stats" class="row">
+  <div class="col-12 col-lg-8 mb-4">
+    <div class="card border-0 shadow-sm h-100">
+      <div class="card-header bg-white py-3 border-0">
+        <h5 class="card-title text-dark mb-0 font-weight-bold">Statut des projets de fin d'études</h5>
+      </div>
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-md-6 mb-3 mb-md-0 d-flex flex-column gap-3">
+            <!-- En Attente -->
+            <div class="p-3 bg-light rounded d-flex align-items-center justify-content-between border-start border-4 border-warning">
+              <div>
+                <span class="text-muted d-block small">En attente</span>
+                <strong class="fs-5">{{ stats.themesEnAttente }}</strong>
+              </div>
+              <span class="badge bg-warning-subtle text-warning-emphasis py-2 px-3 rounded-pill">
+                {{ stats.totalThemes > 0 ? ((stats.themesEnAttente / stats.totalThemes) * 100 | number:'1.0-0') : 0 }}%
+              </span>
+            </div>
+
+            <!-- Validé -->
+            <div class="p-3 bg-light rounded d-flex align-items-center justify-content-between border-start border-4 border-success">
+              <div>
+                <span class="text-muted d-block small">Validés</span>
+                <strong class="fs-5">{{ stats.themesValides }}</strong>
+              </div>
+              <span class="badge bg-success-subtle text-success-emphasis py-2 px-3 rounded-pill">
+                {{ stats.totalThemes > 0 ? ((stats.themesValides / stats.totalThemes) * 100 | number:'1.0-0') : 0 }}%
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-6 d-flex flex-column gap-3">
+            <!-- Soutenu -->
+            <div class="p-3 bg-light rounded d-flex align-items-center justify-content-between border-start border-4 border-primary">
+              <div>
+                <span class="text-muted d-block small">Soutenus</span>
+                <strong class="fs-5">{{ stats.themesSoutenus }}</strong>
+              </div>
+              <span class="badge bg-primary-subtle text-primary-emphasis py-2 px-3 rounded-pill">
+                {{ stats.totalThemes > 0 ? ((stats.themesSoutenus / stats.totalThemes) * 100 | number:'1.0-0') : 0 }}%
+              </span>
+            </div>
+
+            <!-- Rejeté -->
+            <div class="p-3 bg-light rounded d-flex align-items-center justify-content-between border-start border-4 border-danger">
+              <div>
+                <span class="text-muted d-block small">Rejetés</span>
+                <strong class="fs-5">{{ stats.themesRejetes }}</strong>
+              </div>
+              <span class="badge bg-danger-subtle text-danger-emphasis py-2 px-3 rounded-pill">
+                {{ stats.totalThemes > 0 ? ((stats.themesRejetes / stats.totalThemes) * 100 | number:'1.0-0') : 0 }}%
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-4 mb-4">
+    <div class="card border-0 shadow-sm h-100 bg-gradient-dark text-white">
+      <div class="card-body p-4 d-flex flex-column justify-content-between">
+        <div>
+          <h5 class="font-weight-bold mb-3">Raccourcis rapides</h5>
+          <p class="small text-white-50">Accédez directement aux formulaires de saisie pour ajouter de nouvelles données.</p>
+        </div>
+        <div class="d-grid gap-2">
+          <a routerLink="/etudiants/nouveau" class="btn btn-outline-light text-start py-2">
+            <i class="bi bi-plus-circle me-2"></i> Ajouter un étudiant
+          </a>
+          <a routerLink="/encadreurs/nouveau" class="btn btn-outline-light text-start py-2">
+            <i class="bi bi-plus-circle me-2"></i> Ajouter un encadreur
+          </a>
+          <a routerLink="/themes/nouveau" class="btn btn-outline-light text-start py-2">
+            <i class="bi bi-plus-circle me-2"></i> Soumettre un thème
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

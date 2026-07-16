@@ -1,0 +1,14 @@
+.bg-secondary-subtle {
+  background-color: #e2e3e5 !important;
+}
+.text-secondary-emphasis {
+  color: #41464b !important;
+}
+.table > :not(caption) > * > * {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.btn-group .btn {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}

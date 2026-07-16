@@ -1,0 +1,135 @@
+<div class="row justify-content-center">
+  <div class="col-12 col-md-10 col-lg-8">
+    <div class="d-flex align-items-center mb-3">
+      <a routerLink="/themes" class="btn btn-link text-decoration-none p-0 me-3">
+        <i class="bi bi-arrow-left fs-4"></i>
+      </a>
+      <h1 class="h3 mb-0 text-dark fw-bold">{{ isEditMode ? 'Modifier / Valider le thème' : 'Soumettre un nouveau thème' }}</h1>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+      <div class="card-body p-4">
+        <form [formGroup]="themeForm" (ngSubmit)="onSubmit()">
+          
+          <div class="row">
+            <!-- Titre -->
+            <div class="col-md-8 mb-3">
+              <label for="titre" class="form-label fw-semibold">Titre du projet / thème <span class="text-danger">*</span></label>
+              <input
+                type="text"
+                id="titre"
+                class="form-control"
+                placeholder="Ex: Système de gestion hospitalière"
+                formControlName="titre"
+                [class.is-invalid]="isFieldInvalid('titre')"
+              />
+              <div class="invalid-feedback">
+                Le titre est obligatoire.
+              </div>
+            </div>
+
+            <!-- Domaine -->
+            <div class="col-md-4 mb-3">
+              <label for="domaine" class="form-label fw-semibold">Domaine d'études <span class="text-danger">*</span></label>
+              <input
+                type="text"
+                id="domaine"
+                class="form-control"
+                placeholder="Ex: Génie Logiciel"
+                formControlName="domaine"
+                [class.is-invalid]="isFieldInvalid('domaine')"
+              />
+              <div class="invalid-feedback">
+                Le domaine est obligatoire.
+              </div>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="description" class="form-label fw-semibold">Description / Résumé du projet <span class="text-danger">*</span></label>
+            <textarea
+              id="description"
+              class="form-control"
+              rows="4"
+              placeholder="Décrire brièvement le projet, objectifs, technologies prévues..."
+              formControlName="description"
+              [class.is-invalid]="isFieldInvalid('description')"
+            ></textarea>
+            <div class="invalid-feedback">
+              La description est obligatoire.
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- Etudiant -->
+            <div class="col-md-6 mb-3">
+              <label for="etudiantId" class="form-label fw-semibold">Étudiant concerné <span class="text-danger">*</span></label>
+              <select
+                id="etudiantId"
+                class="form-select"
+                formControlName="etudiantId"
+                [class.is-invalid]="isFieldInvalid('etudiantId')"
+              >
+                <option value="" disabled selected>-- Sélectionner l'étudiant --</option>
+                <option *ngFor="let etudiant of etudiants" [value]="etudiant.id">
+                  [{{ etudiant.matricule }}] {{ etudiant.nom | uppercase }} {{ etudiant.prenom }}
+                </option>
+              </select>
+              <div class="invalid-feedback">
+                Veuillez sélectionner un étudiant.
+              </div>
+            </div>
+
+            <!-- Encadreur -->
+            <div class="col-md-6 mb-3">
+              <label for="encadreurId" class="form-label fw-semibold">Enseignant-Encadreur <span class="text-danger">*</span></label>
+              <select
+                id="encadreurId"
+                class="form-select"
+                formControlName="encadreurId"
+                [class.is-invalid]="isFieldInvalid('encadreurId')"
+              >
+                <option value="" disabled selected>-- Sélectionner l'encadreur --</option>
+                <option *ngFor="let encadreur of encadreurs" [value]="encadreur.id">
+                  {{ encadreur.nom }} (Spécialité: {{ encadreur.specialite }} | Quota: {{ encadreur.disponibilite }})
+                </option>
+              </select>
+              <div class="invalid-feedback">
+                Veuillez sélectionner un encadreur.
+              </div>
+            </div>
+          </div>
+
+          <!-- Statut -->
+          <div class="mb-4">
+            <label for="statut" class="form-label fw-semibold">Statut d'approbation <span class="text-danger">*</span></label>
+            <select
+              id="statut"
+              class="form-select"
+              formControlName="statut"
+              [class.is-invalid]="isFieldInvalid('statut')"
+            >
+              <option *ngFor="let stat of statuts" [value]="stat">
+                {{ getStatusLabel(stat) }}
+              </option>
+            </select>
+            <div class="invalid-feedback">
+              Le statut est obligatoire.
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="d-flex justify-content-end gap-2 border-top pt-3">
+            <a routerLink="/themes" class="btn btn-light px-4">Annuler</a>
+            <button type="submit" class="btn btn-primary px-4" [disabled]="submitting">
+              <span class="spinner-border spinner-border-sm me-1" *ngIf="submitting"></span>
+              Enregistrer
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
