@@ -1,0 +1,262 @@
+{
+  "info": {
+    "name": "LabéStages API — Collection de tests",
+    "description": "Collection Postman couvrant les 3 ressources (étudiants, encadreurs, thèmes) + dashboard. Minimum 12 tests requis par le cahier des charges.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080/api", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "GET /dashboard — Statistiques globales",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/dashboard"
+          },
+          "response_attendue": "200 OK — { totalEtudiants:N, totalEncadreurs:N, totalThemes:N, ... }"
+        }
+      ]
+    },
+    {
+      "name": "Étudiants",
+      "item": [
+        {
+          "name": "T01 — POST /etudiants — Créer un étudiant valide",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/etudiants",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"matricule\": \"LIC3-2024-001\",\n  \"nom\": \"Diallo\",\n  \"prenom\": \"Mamadou\",\n  \"email\": \"mamadou.diallo@univ-labe.gn\",\n  \"niveau\": \"L3\"\n}"
+            }
+          },
+          "resultat_attendu": "201 Created — Objet étudiant avec id généré",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T02 — POST /etudiants — Matricule dupliqué → 400",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/etudiants",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"matricule\": \"LIC3-2024-001\",\n  \"nom\": \"Barry\",\n  \"prenom\": \"Alpha\",\n  \"email\": \"alpha.barry@univ-labe.gn\",\n  \"niveau\": \"L3\"\n}"
+            }
+          },
+          "resultat_attendu": "400 Bad Request — { status:400, message: '...matricule...existe déjà' }",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T03 — POST /etudiants — Email invalide → 400",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/etudiants",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"matricule\": \"LIC3-2024-002\",\n  \"nom\": \"Sow\",\n  \"prenom\": \"Fatoumata\",\n  \"email\": \"email-invalide\",\n  \"niveau\": \"L3\"\n}"
+            }
+          },
+          "resultat_attendu": "400 Bad Request — { status:400, message:'Données invalides...' }",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T04 — GET /etudiants — Liste complète",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/etudiants"
+          },
+          "resultat_attendu": "200 OK — Tableau JSON des étudiants",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T05 — GET /etudiants?search=Diallo — Recherche par nom",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/etudiants?search=Diallo"
+          },
+          "resultat_attendu": "200 OK — Tableau filtré contenant Diallo",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T06 — GET /etudiants/1 — Détail étudiant",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/etudiants/1"
+          },
+          "resultat_attendu": "200 OK — Objet étudiant id=1",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T07 — GET /etudiants/999 — Introuvable → 404",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/etudiants/999"
+          },
+          "resultat_attendu": "404 Not Found — { status:404, message:'...introuvable' }",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T08 — PUT /etudiants/1 — Modifier un étudiant",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/etudiants/1",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"matricule\": \"LIC3-2024-001\",\n  \"nom\": \"Diallo\",\n  \"prenom\": \"Mamadou Aliou\",\n  \"email\": \"mamadou.diallo@univ-labe.gn\",\n  \"niveau\": \"L3\"\n}"
+            }
+          },
+          "resultat_attendu": "200 OK — Objet étudiant mis à jour",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T09 — DELETE /etudiants/1 — Supprimer un étudiant",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/etudiants/1"
+          },
+          "resultat_attendu": "204 No Content",
+          "resultat_obtenu": ""
+        }
+      ]
+    },
+    {
+      "name": "Encadreurs",
+      "item": [
+        {
+          "name": "T10 — POST /encadreurs — Créer un encadreur valide",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/encadreurs",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Prof. Keïta\",\n  \"email\": \"keita@univ-labe.gn\",\n  \"specialite\": \"Génie Logiciel\",\n  \"disponibilite\": 3\n}"
+            }
+          },
+          "resultat_attendu": "201 Created",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T11 — POST /encadreurs — Disponibilité négative → 400",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/encadreurs",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Prof. Bah\",\n  \"email\": \"bah@univ-labe.gn\",\n  \"specialite\": \"Réseaux\",\n  \"disponibilite\": -1\n}"
+            }
+          },
+          "resultat_attendu": "400 Bad Request",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T12 — GET /encadreurs — Liste",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/encadreurs"
+          },
+          "resultat_attendu": "200 OK",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T13 — PUT /encadreurs/1 — Modifier",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/encadreurs/1",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Prof. Keïta Ibrahima\",\n  \"email\": \"keita@univ-labe.gn\",\n  \"specialite\": \"Génie Logiciel & IA\",\n  \"disponibilite\": 4\n}"
+            }
+          },
+          "resultat_attendu": "200 OK",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T14 — DELETE /encadreurs/1 — Supprimer",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/encadreurs/1"
+          },
+          "resultat_attendu": "204 No Content",
+          "resultat_obtenu": ""
+        }
+      ]
+    },
+    {
+      "name": "Thèmes",
+      "item": [
+        {
+          "name": "T15 — POST /themes — Créer un thème valide",
+          "note": "Nécessite un étudiantId et encadreurId existants",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/themes",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Système de gestion universitaire\",\n  \"description\": \"Application web pour la gestion administrative de l'université\",\n  \"domaine\": \"Génie Logiciel\",\n  \"statut\": \"EN_ATTENTE\",\n  \"etudiantId\": 1,\n  \"encadreurId\": 1\n}"
+            }
+          },
+          "resultat_attendu": "201 Created — ThemeDTO avec étudiant et encadreur aplatis",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T16 — POST /themes — Étudiant déjà affecté → 400",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/themes",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Autre thème\",\n  \"description\": \"Description\",\n  \"domaine\": \"Réseaux\",\n  \"statut\": \"EN_ATTENTE\",\n  \"etudiantId\": 1,\n  \"encadreurId\": 1\n}"
+            }
+          },
+          "resultat_attendu": "400 Bad Request — Étudiant déjà affecté",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T17 — GET /themes — Liste",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/themes"
+          },
+          "resultat_attendu": "200 OK",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T18 — PUT /themes/1 — Changer statut → VALIDE",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/themes/1",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Système de gestion universitaire\",\n  \"description\": \"Application web pour la gestion administrative de l'université\",\n  \"domaine\": \"Génie Logiciel\",\n  \"statut\": \"VALIDE\",\n  \"etudiantId\": 1,\n  \"encadreurId\": 1\n}"
+            }
+          },
+          "resultat_attendu": "200 OK — statut: VALIDE",
+          "resultat_obtenu": ""
+        },
+        {
+          "name": "T19 — DELETE /themes/1 — Supprimer",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/themes/1"
+          },
+          "resultat_attendu": "204 No Content",
+          "resultat_obtenu": ""
+        }
+      ]
+    }
+  ]
+}
