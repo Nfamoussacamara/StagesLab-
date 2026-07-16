@@ -137,3 +137,26 @@ h3 {
   background-color: #26c281 !important;
   color: #ffffff !important;
 }
+
+/* ============================
+   Responsive — Mobile (< 576px)
+   ============================ */
+@media (max-width: 575.98px) {
+  h1 { font-size: 22px; }
+  h2 { font-size: 16px; }
+
+  /* Réduire le padding du contenu principal sur mobile */
+  .content-container {
+    padding: 1rem !important;
+  }
+
+  /* Tableaux : masquer colonnes secondaires sur très petit écran */
+  .table .d-none-mobile { display: none !important; }
+}
+
+/* ============================
+   Responsive — Tablette (576px - 991px)
+   ============================ */
+@media (min-width: 576px) and (max-width: 991.98px) {
+  h1 { font-size: 24px; }
+}

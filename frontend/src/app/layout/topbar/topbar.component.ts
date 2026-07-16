@@ -21,7 +21,7 @@ import { CommonModule } from '@angular/common';
         
         <!-- Right side tools (Quick info) -->
         <div class="d-flex align-items-center ms-auto">
-          <img src="Logo_univ_labe.png" alt="Université de Labé" style="height: 52px; width: auto; object-fit: contain;">
+          <img src="Logo_univ_labe.png" alt="Université de Labé" class="topbar-logo" style="width: auto; object-fit: contain;">
         </div>
         
       </div>
@@ -43,9 +43,25 @@ import { CommonModule } from '@angular/common';
     }
     .current-title {
       letter-spacing: -0.3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
+    }
+    .topbar-logo {
+      height: 44px;
     }
     .fs-7 {
       font-size: 0.85rem;
+    }
+    @media (max-width: 575.98px) {
+      .topbar-logo {
+        height: 30px;
+      }
+      .current-title {
+        max-width: 120px;
+        font-size: 1rem;
+      }
     }
   `]
 })

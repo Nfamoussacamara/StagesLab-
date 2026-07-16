@@ -1,5 +1,5 @@
-<div class="d-flex justify-content-between align-items-center mb-4">
-  <p class="text-muted mb-0">Vue d'ensemble de l'activité des mémoires, stages et encadrements.</p>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
+  <p class="text-muted mb-0 flex-grow-1">Vue d'ensemble de l'activité des mémoires, stages et encadrements.</p>
   <button class="btn btn-outline-primary shadow-xs px-3 py-2 rounded-3 d-flex align-items-center" (click)="loadStats()">
     <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true" *ngIf="loading"></span>
     <i class="bi bi-arrow-clockwise me-1" *ngIf="!loading"></i>
@@ -87,9 +87,9 @@
   </div>
 
   <!-- Carte En attente -->
-  <div class="col-6 col-lg-3">
+  <div class="col-12 col-sm-6 col-lg-3">
     <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
-      <div class="card-body p-4">
+      <div class="card-body p-3">
         <div class="d-flex align-items-center justify-content-between mb-2">
           <span class="badge rounded-pill px-2 py-1 text-dark fw-semibold" style="background-color:#fef3c7; font-size:0.7rem;">En attente</span>
           <i class="bi bi-hourglass-split fs-4" style="color:#f59e0b;"></i>
@@ -108,9 +108,9 @@
   </div>
 
   <!-- Carte Validés -->
-  <div class="col-6 col-lg-3">
+  <div class="col-12 col-sm-6 col-lg-3">
     <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
-      <div class="card-body p-4">
+      <div class="card-body p-3">
         <div class="d-flex align-items-center justify-content-between mb-2">
           <span class="badge rounded-pill px-2 py-1 fw-semibold" style="background-color:#dcfce7; color:#15803d; font-size:0.7rem;">Validés</span>
           <i class="bi bi-patch-check-fill fs-4" style="color:#26c281;"></i>
@@ -129,9 +129,9 @@
   </div>
 
   <!-- Carte Soutenus -->
-  <div class="col-6 col-lg-3">
+  <div class="col-12 col-sm-6 col-lg-3">
     <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
-      <div class="card-body p-4">
+      <div class="card-body p-3">
         <div class="d-flex align-items-center justify-content-between mb-2">
           <span class="badge rounded-pill px-2 py-1 fw-semibold" style="background-color:#f3e8ff; color:#7e22ce; font-size:0.7rem;">Soutenus</span>
           <i class="bi bi-mortarboard-fill fs-4" style="color:#7e22ce;"></i>
@@ -150,9 +150,9 @@
   </div>
 
   <!-- Carte Rejetés -->
-  <div class="col-6 col-lg-3">
+  <div class="col-12 col-sm-6 col-lg-3">
     <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
-      <div class="card-body p-4">
+      <div class="card-body p-3">
         <div class="d-flex align-items-center justify-content-between mb-2">
           <span class="badge rounded-pill px-2 py-1 fw-semibold" style="background-color:#fee2e2; color:#b91c1c; font-size:0.7rem;">Rejetés</span>
           <i class="bi bi-x-circle-fill fs-4" style="color:#ef4444;"></i>
