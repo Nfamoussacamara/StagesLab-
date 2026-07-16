@@ -29,7 +29,7 @@ public class Encadreur {
 
     @NotBlank(message = "L'email est obligatoire")
     @Email(message = "L'email doit être au format valide")
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String email;
 
     @NotBlank(message = "La spécialité est obligatoire")

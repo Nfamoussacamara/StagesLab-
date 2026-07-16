@@ -44,7 +44,8 @@ public class GlobalExceptionHandler {
     // 500 — Toute autre erreur non anticipée
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneric(Exception ex) {
-        ErrorResponse error = new ErrorResponse(LocalDateTime.now(), 500, "Erreur interne du serveur");
+        ex.printStackTrace(); // Log de la trace d'erreur pour le débogage console
+        ErrorResponse error = new ErrorResponse(LocalDateTime.now(), 500, "Erreur interne du serveur : " + ex.getMessage());
         return ResponseEntity.status(500).body(error);
     }
 }

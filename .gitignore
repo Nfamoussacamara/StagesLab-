@@ -11,6 +11,8 @@ backend/.settings/
 backend/.idea/
 backend/*.iml
 backend/HELP.md
+backend/data/
+
 
 # ============================
 # Angular / Node

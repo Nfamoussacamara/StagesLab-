@@ -31,13 +31,15 @@ public class ThemeService {
 
     // ─── Lecture ─────────────────────────────────────────────
 
+    @Transactional(readOnly = true)
     public List<ThemeDTO> findAll() {
-        return themeRepository.findAll()
+        return themeRepository.findAllWithEtudiantAndEncadreur()
                 .stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public ThemeDTO findById(Long id) {
         return toDTO(getEntityOrThrow(id));
     }

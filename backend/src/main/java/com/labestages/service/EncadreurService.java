@@ -5,6 +5,7 @@ import com.labestages.entity.Encadreur;
 import com.labestages.exception.BusinessException;
 import com.labestages.exception.ResourceNotFoundException;
 import com.labestages.repository.EncadreurRepository;
+import com.labestages.repository.ThemeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class EncadreurService {
 
     private final EncadreurRepository encadreurRepository;
+    private final ThemeRepository themeRepository;
 
     // ─── Lecture ─────────────────────────────────────────────
 
@@ -69,6 +71,9 @@ public class EncadreurService {
         if (!encadreurRepository.existsById(id)) {
             throw new ResourceNotFoundException("Encadreur", id);
         }
+        // Supprimer tous les thèmes encadrés par cette personne avant suppression pour éviter la violation de clé étrangère
+        themeRepository.findByEncadreurId(id).forEach(themeRepository::delete);
+
         encadreurRepository.deleteById(id);
     }
 

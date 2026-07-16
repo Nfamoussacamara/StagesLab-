@@ -1,10 +1,7 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
-  <div>
-    <h1 class="h3 mb-1 text-dark fw-bold">Gestion des Étudiants</h1>
-    <p class="text-muted mb-0">Liste des étudiants de Licence 3 enregistrés pour les projets de fin d'études.</p>
-  </div>
-  <a routerLink="/etudiants/nouveau" class="btn btn-primary">
-    <i class="bi bi-plus-lg me-1"></i> Nouvel Étudiant
+  <p class="text-muted mb-0">Liste des étudiants de Licence 3 enregistrés pour les projets de fin d'études.</p>
+  <a routerLink="/etudiants/nouveau" class="btn btn-primary shadow-sm px-4 py-2 rounded-3 d-flex align-items-center">
+    <i class="bi bi-plus-lg me-2"></i> Nouvel Étudiant
   </a>
 </div>
 
@@ -84,7 +81,7 @@
 <app-confirm-delete
   *ngIf="showDeleteModal"
   [title]="'Supprimer l\'étudiant'"
-  [message]="'Voulez-vous vraiment supprimer l\'étudiant ' + etudiantToDelete?.prenom + ' ' + etudiantToDelete?.nom + ' ?'"
+  [message]="'Voulez-vous vraiment supprimer ' + etudiantToDelete?.prenom + ' ' + etudiantToDelete?.nom + ' ? Cette action est irréversible.'"
   (confirmed)="confirmDelete()"
   (cancelled)="cancelDelete()"
 ></app-confirm-delete>

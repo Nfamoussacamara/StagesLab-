@@ -1,6 +1,9 @@
 /* ============================
-   LabéStages — Styles globaux
+   LabéStages — Styles globaux (Charte FINE)
    ============================ */
+
+/* Import des Polices Google Fonts (Montserrat & Open Sans) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
 /* Bootstrap */
 @import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,17 +12,128 @@
 /* ngx-toastr */
 @import "ngx-toastr/toastr";
 
-/* Variables globales */
+/* Variables globales définies par la Charte Graphique FINE */
 :root {
-  --primary: #1a56db;
-  --secondary: #6c757d;
-  --success: #0f9d58;
-  --danger: #d93025;
-  --bg-light: #f8f9fa;
+  --primary: #1a3a6b;       /* Bleu profond FINE */
+  --accent: #26c281;        /* Vert émeraude FINE */
+  --cta: #f59e0b;           /* Orange vif pour les boutons CTA */
+  --secondary: #64748b;     /* Gris ardoise secondaire pour les textes */
+  --success: #10b981;       /* Vert de validation */
+  --danger: #ef4444;        /* Rouge rejet */
+  --bg-light: #f8fafc;      /* Gris clair Fonds / Espaces Blancs */
 }
 
+/* Application des polices de caractères */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Open Sans', 'Segoe UI', sans-serif;
   background-color: var(--bg-light);
-  color: #333;
+  color: #1e293b;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-title,
+.btn,
+.nav,
+.sidebar,
+.navbar-brand,
+.modal-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+/* Surcharge de la structure de titres */
+h1 {
+  font-size: 28px;
+  font-weight: 800; /* Montserrat Bold 28pt */
+  color: var(--primary);
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 700; /* Montserrat Bold 20pt */
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: 700; /* Montserrat Bold 14pt */
+}
+
+/* Surcharge des Boutons Principaux (CTA) en Orange vif conformément à la règle 'Orange uniquement pour les boutons CTA' */
+.btn-primary {
+  background-color: var(--cta) !important;
+  border-color: var(--cta) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+  background-color: #d97706 !important;
+  border-color: #b45309 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(217, 119, 6, 0.3), 0 2px 4px -2px rgba(217, 119, 6, 0.3) !important;
+}
+
+/* Boutons secondaires outline */
+.btn-outline-primary {
+  color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  font-weight: 600;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary) !important;
+  color: #ffffff !important;
+}
+
+/* Surcharge du design de la Sidebar */
+::ng-deep app-sidebar .sidebar {
+  background-color: #1b7a4e !important; /* Vert émeraude foncé sur la Sidebar */
+}
+
+/* En-tête des formulaires */
+.form-header {
+  background-color: #26c281 !important; /* Vert émeraude vif #26c281 */
+  color: #ffffff !important;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 3px solid rgba(255,255,255,0.25);
+}
+
+/* Ligne d'accentuation verte sous le logo de la Sidebar */
+::ng-deep app-sidebar .brand-header {
+  border-bottom: 3px solid var(--accent) !important; /* Vert émeraude innovation */
+}
+
+/* Style de sélection actif de la Sidebar */
+::ng-deep app-sidebar .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border-left: 4px solid var(--accent) !important; /* Bordure d'accentuation verte */
+  box-shadow: none !important;
+}
+
+/* Badges success et danger calibrés sur la charte */
+.bg-success {
+  background-color: var(--accent) !important;
+  color: white !important;
+}
+
+/* Tableaux modernes avec en-têtes vert émeraude */
+.table-dark {
+  background-color: #26c281 !important; /* Vert émeraude vif #26c281 pour les en-têtes de listes */
+  color: #ffffff !important;
+  border-color: #26c281 !important;
+}
+
+.table th {
+  border-bottom: 2px solid rgba(255,255,255,0.2) !important;
+  background-color: #26c281 !important;
+  color: #ffffff !important;
 }

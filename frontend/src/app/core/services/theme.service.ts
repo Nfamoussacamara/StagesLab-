@@ -7,7 +7,7 @@ import { Theme, ThemeRequest } from '../models/types';
   providedIn: 'root'
 })
 export class ThemeService {
-  private apiUrl = 'http://localhost:8080/api/themes';
+  private apiUrl = '/api/themes';
 
   constructor(private http: HttpClient) {}
 

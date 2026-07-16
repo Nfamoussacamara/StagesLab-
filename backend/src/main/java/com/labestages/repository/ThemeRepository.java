@@ -31,4 +31,8 @@ public interface ThemeRepository extends JpaRepository<Theme, Long> {
 
     // Lister les thèmes d'un encadreur donné
     List<Theme> findByEncadreurId(Long encadreurId);
+
+    // Récupérer de façon Eager tous les thèmes avec leurs étudiants et encadreurs pour éviter N+1 requêtes et LazyInitializationException
+    @org.springframework.data.jpa.repository.Query("SELECT t FROM Theme t JOIN FETCH t.etudiant JOIN FETCH t.encadreur")
+    List<Theme> findAllWithEtudiantAndEncadreur();
 }

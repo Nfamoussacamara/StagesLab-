@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { EncadreurService } from '../../core/services/encadreur.service';
@@ -23,7 +23,8 @@ export class EncadreurListComponent implements OnInit {
 
   constructor(
     private encadreurService: EncadreurService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -36,11 +37,13 @@ export class EncadreurListComponent implements OnInit {
       next: (data) => {
         this.encadreurs = data;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error(err);
-        this.toastr.error('Erreur lors du chargement des encadreurs', 'Erreur');
         this.loading = false;
+        this.cdr.detectChanges();
+        this.toastr.error('Erreur lors du chargement des encadreurs', 'Erreur');
       }
     });
   }

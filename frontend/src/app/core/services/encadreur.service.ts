@@ -7,7 +7,7 @@ import { Encadreur } from '../models/types';
   providedIn: 'root'
 })
 export class EncadreurService {
-  private apiUrl = 'http://localhost:8080/api/encadreurs';
+  private apiUrl = '/api/encadreurs';
 
   constructor(private http: HttpClient) {}
 

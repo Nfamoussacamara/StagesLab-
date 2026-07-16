@@ -5,6 +5,7 @@ import com.labestages.entity.Etudiant;
 import com.labestages.exception.BusinessException;
 import com.labestages.exception.ResourceNotFoundException;
 import com.labestages.repository.EtudiantRepository;
+import com.labestages.repository.ThemeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 public class EtudiantService {
 
     private final EtudiantRepository etudiantRepository;
+    private final ThemeRepository themeRepository;
 
     // ─── Lecture ─────────────────────────────────────────────
 
@@ -50,6 +52,10 @@ public class EtudiantService {
         if (etudiantRepository.existsByMatricule(dto.getMatricule())) {
             throw new BusinessException("Un étudiant avec le matricule '" + dto.getMatricule() + "' existe déjà");
         }
+        // Règle métier : email unique
+        if (etudiantRepository.existsByEmail(dto.getEmail())) {
+            throw new BusinessException("Un étudiant avec l'email '" + dto.getEmail() + "' existe déjà");
+        }
 
         Etudiant etudiant = toEntity(dto);
         if (etudiant.getNiveau() == null || etudiant.getNiveau().isBlank()) {
@@ -69,6 +75,10 @@ public class EtudiantService {
         if (etudiantRepository.existsByMatriculeAndIdNot(dto.getMatricule(), id)) {
             throw new BusinessException("Un étudiant avec le matricule '" + dto.getMatricule() + "' existe déjà");
         }
+        // Règle métier : email unique (en excluant l'ID actuel)
+        if (etudiantRepository.existsByEmailAndIdNot(dto.getEmail(), id)) {
+            throw new BusinessException("Un étudiant avec l'email '" + dto.getEmail() + "' existe déjà");
+        }
 
         existing.setMatricule(dto.getMatricule());
         existing.setNom(dto.getNom());
@@ -86,6 +96,9 @@ public class EtudiantService {
         if (!etudiantRepository.existsById(id)) {
             throw new ResourceNotFoundException("Étudiant", id);
         }
+        // Supprimer d'abord le thème associé s'il existe pour éviter la violation de clé étrangère (integrity constraint)
+        themeRepository.findByEtudiantId(id).ifPresent(themeRepository::delete);
+        
         etudiantRepository.deleteById(id);
     }
 

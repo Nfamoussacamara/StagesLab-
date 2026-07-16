@@ -21,6 +21,12 @@ public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
     // Vérifier l'unicité du matricule en excluant l'ID actuel (pour la modification)
     boolean existsByMatriculeAndIdNot(String matricule, Long id);
 
+    // Vérifier l'unicité de l'email
+    boolean existsByEmail(String email);
+
+    // Vérifier l'unicité de l'email en excluant l'ID actuel
+    boolean existsByEmailAndIdNot(String email, Long id);
+
     // Recherche par matricule exact
     Optional<Etudiant> findByMatricule(String matricule);
 

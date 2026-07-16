@@ -40,13 +40,13 @@ public class Theme {
     private StatutTheme statut = StatutTheme.EN_ATTENTE;
 
     // Relation ManyToOne vers Etudiant (un étudiant → un thème)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "etudiant_id", nullable = false)
     @NotNull(message = "L'étudiant est obligatoire")
     private Etudiant etudiant;
 
     // Relation ManyToOne vers Encadreur (un encadreur → plusieurs thèmes)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "encadreur_id", nullable = false)
     @NotNull(message = "L'encadreur est obligatoire")
     private Encadreur encadreur;

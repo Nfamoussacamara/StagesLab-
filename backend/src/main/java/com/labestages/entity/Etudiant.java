@@ -35,7 +35,7 @@ public class Etudiant {
 
     @NotBlank(message = "L'email est obligatoire")
     @Email(message = "L'email doit être au format valide")
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Column(nullable = false)

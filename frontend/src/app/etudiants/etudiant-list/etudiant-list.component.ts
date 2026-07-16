@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -25,7 +25,8 @@ export class EtudiantListComponent implements OnInit {
 
   constructor(
     private etudiantService: EtudiantService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -38,11 +39,13 @@ export class EtudiantListComponent implements OnInit {
       next: (data) => {
         this.etudiants = data;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error(err);
-        this.toastr.error('Erreur de chargement des étudiants', 'Erreur');
         this.loading = false;
+        this.cdr.detectChanges();
+        this.toastr.error('Erreur de chargement des étudiants', 'Erreur');
       }
     });
   }
