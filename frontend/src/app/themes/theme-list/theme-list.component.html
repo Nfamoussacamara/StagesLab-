@@ -74,7 +74,7 @@
 <app-confirm-delete
   *ngIf="showDeleteModal"
   [title]="'Supprimer le thème'"
-  [message]="'Voulez-vous vraiment supprimer le thème : \\'' + themeToDelete?.titre + '\\' ? Cette opération est irréversible.'"
+  [message]="'Voulez-vous vraiment supprimer le thème : ' + themeToDelete?.titre + ' ? Cette opération est irréversible.'"
   (confirmed)="confirmDelete()"
   (cancelled)="cancelDelete()"
 ></app-confirm-delete>
