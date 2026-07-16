@@ -62,7 +62,7 @@ Le serveur sera actif sur : **`http://localhost:8080`**
 
 * **Accès OpenAPI & Swagger :** Ouvrez `http://localhost:8080/swagger-ui.html` dans un navigateur.
 * **Accès Console Database H2 :** Ouvrez `http://localhost:8080/h2-console`
-  * *JDBC URL :* `jdbc:h2:mem:labestagesdb`
+  * *JDBC URL :* `jdbc:h2:file:./data/labestagesdb`
   * *Username :* `sa` (mot de passe vide)
 
 ---
