@@ -102,3 +102,29 @@ Pour l'exécuter :
 1. Ouvrez Postman.
 2. Cliquez sur **Import** (en haut à gauche) -> importez ce fichier JSON.
 3. Testez directement les requêtes ordonnées par ressource.
+
+---
+
+## 📸 Aperçu de l'Application
+
+### Tableau de bord
+![Tableau de bord](docs/screenshots/Capture%20d'écran%202026-07-16%20171706.png)
+
+### Gestion des Étudiants
+![Liste des étudiants](docs/screenshots/Capture%20d'écran%202026-07-16%20171749.png)
+
+### Gestion des Encadreurs
+![Liste des encadreurs](docs/screenshots/Capture%20d'écran%202026-07-16%20171841.png)
+
+### Gestion des Thèmes
+![Liste des thèmes](docs/screenshots/Capture%20d'écran%202026-07-16%20171909.png)
+
+---
+
+## 📂 Documentation Complémentaire
+
+| Document | Contenu |
+|---|---|
+| [`docs/note-de-conception.md`](docs/note-de-conception.md) | Architecture, modèle de données, choix techniques et difficultés rencontrées |
+| [`docs/labestages_postman_collection.json`](docs/labestages_postman_collection.json) | Collection complète de tests API (19 cas) |
+| [`docs/screenshots/`](docs/screenshots/) | Captures d'écran de l'application |
