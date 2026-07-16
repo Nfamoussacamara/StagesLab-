@@ -50,10 +50,6 @@ import { RouterModule } from '@angular/router';
         </li>
       </ul>
       
-      <!-- Footer Info inside Sidebar -->
-      <div class="p-3 footer-brand-container animate-fade" *ngIf="!isCollapsed">
-        <small class="text-muted d-block text-center fs-8">Licence 3 Informatique</small>
-      </div>
     </div>
   `,
   styles: [`

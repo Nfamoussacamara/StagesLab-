@@ -20,9 +20,8 @@ import { CommonModule } from '@angular/common';
         </div>
         
         <!-- Right side tools (Quick info) -->
-        <div class="d-flex align-items-center text-muted fs-7">
-          <span class="d-none d-sm-inline me-2 fw-semibold text-secondary">Université de Labé</span>
-          <span class="d-none d-sm-inline badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1">Licence 3</span>
+        <div class="d-flex align-items-center ms-auto">
+          <img src="Logo_univ_labe.png" alt="Université de Labé" style="height: 52px; width: auto; object-fit: contain;">
         </div>
         
       </div>
